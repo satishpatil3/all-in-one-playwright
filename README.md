@@ -171,12 +171,10 @@ Validates application stability against common browser exceptions:
 
 ## 6. Key Observations & Learnings
 
-1. **Corporate Network Redirection (SAML SSO Interception)**:
-   When running UI tests within strict corporate networks, calls to public test endpoints (like Herokuapp) may be intercepted by corporate firewalls, redirecting the automated browser to the organization's **Microsoft Azure AD (Entra ID) portal**. 
-2. **Impact of Global HTTP Headers**:
-   Declaring headers like `Accept: application/json` globally in `playwright.config.js` causes page navigations to send unexpected JSON headers. During SAML SSO redirects, this confuses Microsoft Entra ID, throwing `AADSTS9000410: Malformed JSON` errors. Resolving this requires isolating API headers in the `ApiClient` layer.
-3. **Enum Constants over Hardcoding**:
+1. **Isolation of Browser Navigation vs. API Headers**:
+   Declaring headers like `Accept: application/json` globally in `playwright.config.js` causes page navigations to send unexpected JSON headers. If a server performs standard HTML page redirects, these forced JSON headers can lead to bad request or server parsing errors. Isolating API-specific headers inside [ApiClient.js](file:///c:/Users/satish.patil1/Sp-learning/all-in--main/utils/apiClient.js) prevents browser navigation conflicts.
+2. **Enum Constants over Hardcoding**:
    Centralizing status codes (`enums/status.enum.js`) and expectations prevents hardcoding "magic values", eliminates typos, enables IDE auto-complete, and streamlines project maintenance.
-4. **Stateful Live Sandboxes vs. Stateless Mock Services**:
+3. **Stateful Live Sandboxes vs. Stateless Mock Services**:
    - Stateful sandboxes (like *Restful Booker*) are subject to multi-user database resets, causing verify checks (like expecting a `404` post-deletion) to be flaky due to caching or concurrent deletions.
    - Stateless mock APIs (like *JSONPlaceholder*) are highly reliable for structure tests but do not enforce validation logic (returning `201 Created` even for bad data). Asserting standard `400 Bad Request` expectations on mock APIs showcases validation mismatches clearly.
