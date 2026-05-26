@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Playwright output
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Allure
+allure-results/
+allure-report/
+
+# Screenshots captured during test runs
+screenshots/
+
+# Logs
+logs/
+*.log
+
+# Environment overrides (never commit real credentials)
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
