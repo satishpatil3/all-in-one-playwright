@@ -165,31 +165,6 @@ You can switch execution environments by setting the `TEST_ENV` variable to `qa`
 ### Configuration & Secrets Handling
 Sensitive credentials are not checked into source control. They are retrieved at runtime via `process.env`. If a variable is missing, the framework falls back to configured defaults for the active profile inside [config/env.js](file:///c:/Users/satish.patil1/Sp-learning/all-in--main/config/env.js). In CI/CD pipelines, these values are mapped as environment secrets.
 
-### Sample Environment Variables
-Here is a list of environment variables used by the framework:
-```ini
-TEST_ENV=qa
-
-# Credentials for Practice Website login
-PRACTICE_USERNAME=student
-PRACTICE_PASSWORD=Password123
-
-# Credentials for Herokuapp login
-HEROKUAPP_USERNAME=tomsmith
-HEROKUAPP_PASSWORD=SuperSecretPassword!
-
-# Credentials for OrangeHRM
-ORANGEHRM_USERNAME=Admin
-ORANGEHRM_PASSWORD=admin123
-
-# Credentials for Saucedemo
-SAUCEDEMO_PASSWORD=secret_sauce
-
-# Credentials for Booking API
-BOOKING_API_USERNAME=admin
-BOOKING_API_PASSWORD=password123
-```
-
 ---
 
 ## 5. Enterprise Best Practices Applied
